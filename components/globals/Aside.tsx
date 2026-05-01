@@ -9,9 +9,9 @@ export default function Aside() {
 
   return (
     <aside
-      className={`hidden md:block dark:bg-gray-800 dark:text-white ${
+      className={`hidden md:block ${
         minimize ? 'w-20' : 'w-64'
-      } animated border-r border-gray-200 dark:border-gray-900 bg-gray-100`}
+      } animated border-r border-gray-200 bg-gray-100`}
     >
       <LogoAside />
     </aside>

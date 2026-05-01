@@ -14,10 +14,10 @@ export default function Drawer() {
     <div
       className={`${
         open ? 'w-64 z-10 opacity-100' : 'w-0 -z-0 opacity-0'
-      } fixed top-0 left-0 h-dvh max-w-64 animated overflow-hidden bg-gray-200 dark:bg-gray-900 dark:text-white`}
+      } fixed top-0 left-0 h-dvh max-w-64 animated overflow-hidden bg-gray-200`}
     >
       {/* Header */}
-      <div className="min-w-64 px-5 border-b border-gray-300 dark:border-gray-800 border-r">
+      <div className="min-w-64 px-5 border-b border-gray-300 border-r">
         <div className="flex items-center justify-between gap-3 h-16">
           <h1 className="">
             <Link href="/">{SCHOOL_NAME}</Link>

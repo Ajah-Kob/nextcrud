@@ -23,7 +23,7 @@ export function ButtonSignOut({ className }: { className?: string }) {
       onClick={() => {
         signOut()
       }}
-      className={`hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded animated w-full text-left ${className}`}
+      className={`hover:bg-gray-100 p-2 rounded animated w-full text-left ${className}`}
     >
       <LogOut className="inline mr-2 mb-1" />
       Logout

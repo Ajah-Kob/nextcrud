@@ -132,7 +132,7 @@ export default function FormProfile({
     <form
       ref={formRef}
       action={handleSubmit}
-      className={`bg-white p-5 md:p-10 mx-auto flex justify-center dark:bg-gray-800 ${className}`}
+      className={`bg-white p-5 md:p-10 mx-auto flex justify-center ${className}`}
       noValidate
       data-loading={pending || isPending}
     >

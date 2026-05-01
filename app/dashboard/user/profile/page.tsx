@@ -12,7 +12,7 @@ export default async function DashboardUserProfilePage() {
   return (
     <section className="main flex flex-col">
       {/** Top */}
-      <div className="main__header font-semibold py-3 px-5 border-b bg-gray-100 dark:bg-gray-800 dark:text-white border-gray-100 dark:border-gray-900">
+      <div className="main__header font-semibold py-3 px-5 border-b bg-gray-100 border-gray-100">
         Profile
       </div>
 

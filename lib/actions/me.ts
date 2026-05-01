@@ -60,7 +60,7 @@ export const getMe: User = cache(async () => {
     ['me', id],
     {
       tags: ['me', table, 'cache'],
-    }
+    },
   )()
 
   return data
@@ -157,7 +157,7 @@ export async function updateMe(_prevState: User, formData: FormData) {
       data: updateData,
     })
 
-    revalidateTag('me')
+    revalidateTag('me', 'max')
 
     return {
       success: true,
@@ -239,7 +239,7 @@ export async function updateMePassword(_prevState: User, formData: FormData) {
       data: { password: hashedPassword, updatedAt: new Date() },
     })
 
-    revalidateTag('me')
+    revalidateTag('me', 'max')
 
     return {
       success: true,

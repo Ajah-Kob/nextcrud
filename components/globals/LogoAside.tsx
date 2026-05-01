@@ -11,7 +11,7 @@ export default function LogoAside() {
   const minimize = useAside((state) => state.minimize)
 
   return (
-    <div className="font-bold px-5 py-2 h-16 flex items-center justify-between gap-1 border-b border-secondary">
+    <div className={`font-bold py-2 h-16 flex items-center border-b border-secondary ${minimize ? 'justify-center px-2' : 'justify-between px-5 gap-1'}`}>
       {!minimize && (
         <Link href="/" className="truncate">
           {SCHOOL_NAME}

@@ -12,7 +12,7 @@ export default async function TemplateDashboard({
     <>
       <section className="flex h-dvh">
         <Aside />
-        <main className="flex flex-col">
+        <main className="flex-1 min-w-0 overflow-x-hidden flex flex-col">
           <HeaderDashboard />
           <section className="flex-1">{children}</section>
           <FooterDashboard />

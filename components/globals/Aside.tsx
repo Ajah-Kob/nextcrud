@@ -27,9 +27,9 @@ export default function Aside() {
         <nav className="p-2 flex flex-col gap-1">
           <Link
             href="/dashboard/users"
-            className={`flex items-center gap-3 px-3 py-2 rounded animated hover:bg-secondary ${
-              pathname === '/dashboard/users' ? 'bg-secondary font-medium' : ''
-            }`}
+            className={`flex items-center gap-3 py-2 rounded animated hover:bg-secondary ${
+              minimize ? 'justify-center px-2' : 'px-3'
+            } ${pathname === '/dashboard/users' ? 'bg-secondary font-medium' : ''}`}
           >
             <Users size={24} className="shrink-0" />
             {!minimize && <span>Users</span>}

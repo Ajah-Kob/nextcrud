@@ -127,7 +127,7 @@ export default function UsersTable({
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full border border-secondary">
+        <table className="min-w-full border border-secondary">
           <thead>
             <tr className="bg-primary border-b border-secondary">
               <th className="text-left py-2 px-3 font-medium">ID</th>

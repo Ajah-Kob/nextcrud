@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { createUser, updateUser, softDeleteUser } from '@/lib/actions/user'
 import { useRouter } from 'next/navigation'
 import { UserPlus, UserPen, Trash2, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { toast } from 'sonner'
 
 type UserRow = {
   id: number
@@ -62,6 +63,7 @@ export default function UsersTable({
       if (result.success) {
         closeModal()
         router.refresh()
+        toast.success('User created successfully')
       } else {
         setFormErrors(result.errors || null)
         const msg = Array.isArray(result.message)
@@ -78,6 +80,7 @@ export default function UsersTable({
       if (result.success) {
         closeModal()
         router.refresh()
+        toast.success('User updated successfully')
       } else {
         setFormErrors(result.errors || null)
         setFormMessage(result.message || null)
@@ -89,6 +92,7 @@ export default function UsersTable({
     startTransition(async () => {
       await softDeleteUser(String(user.id))
       setDeleteTarget(null)
+      toast.success(`${user.name} deleted`)
       // If this was the only row on a non-first page, step back
       if (users.length === 1 && page > 1) {
         goToPage(page - 1)
@@ -102,9 +106,9 @@ export default function UsersTable({
     <>
       {/* Action bar */}
       <div className="flex justify-between items-center mb-4">
-        <p className="text-sm text-gray-500">{total} user(s)</p>
+        <p className="text-gray-500">{total} user(s)</p>
         <button
-          className="button flex items-center gap-2 bg-gray-800 text-white hover:bg-gray-700 text-sm px-4"
+          className="button flex items-center gap-2 bg-accent text-white hover:bg-accent/80 px-4"
           onClick={openAdd}
         >
           <UserPlus size={16} />
@@ -114,9 +118,9 @@ export default function UsersTable({
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full text-sm border border-gray-200">
+        <table className="w-full border border-secondary">
           <thead>
-            <tr className="bg-gray-100 border-b border-gray-200">
+            <tr className="bg-primary border-b border-secondary">
               <th className="text-left py-2 px-3 font-medium">ID</th>
               <th className="text-left py-2 px-3 font-medium">Name</th>
               <th className="text-left py-2 px-3 font-medium">Email</th>
@@ -127,7 +131,7 @@ export default function UsersTable({
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id} className="border-b border-gray-100 hover:bg-gray-50">
+              <tr key={user.id} className="border-b border-primary hover:bg-primary/60">
                 <td className="py-2 px-3 text-gray-400">{user.id}</td>
                 <td className="py-2 px-3">{user.name}</td>
                 <td className="py-2 px-3">{user.email}</td>
@@ -170,7 +174,7 @@ export default function UsersTable({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between mt-4 text-sm">
+        <div className="flex items-center justify-between mt-4">
           <p className="text-gray-500">
             Page {page} of {totalPages}
           </p>
@@ -186,7 +190,7 @@ export default function UsersTable({
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
               <button
                 key={p}
-                className={`button min-w-9 ${page === p ? 'bg-gray-800 text-white hover:bg-gray-700' : ''}`}
+                className={`button min-w-9 ${page === p ? 'bg-accent text-white hover:bg-accent/80' : ''}`}
                 onClick={() => goToPage(p)}
               >
                 {p}

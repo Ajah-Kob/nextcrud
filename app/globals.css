@@ -5,16 +5,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: theme(colors.gray.100);
-  --secondary: theme(colors.gray.200);
-  --border: theme(colors.gray.200);
+  --primary: #f3f4f6;
+  --secondary: #e5e7eb;
+  --tertiary: #d1d5db;
+  --accent: #1f2937;
 }
 
-/** Base light theme */
 @theme inline {
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --color-border: var(--border);
+  --color-tertiary: var(--tertiary);
+  --color-accent: var(--accent);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -23,6 +24,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 body {
@@ -45,7 +47,7 @@ form {
   input,
   select,
   textarea {
-    @apply p-2 ring-0 outline-none border border-gray-300;
+    @apply p-2 ring-0 outline-none border border-tertiary;
   }
   select,
   input[type='date'] {
@@ -58,7 +60,7 @@ form {
     @apply field-sizing-content;
   }
   button {
-    @apply p-2 bg-gray-300 cursor-pointer;
+    @apply p-2 bg-tertiary cursor-pointer;
   }
 }
 

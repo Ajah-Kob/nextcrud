@@ -2,39 +2,34 @@
 
 import prisma from "@/lib/prisma"
 import { hash } from "bcrypt"
-import { revalidatePath } from "next/cache"
+import { revalidateTag, revalidatePath, cacheLife, cacheTag } from "next/cache"
 import { USERS_PER_PAGE } from "@/config/constants"
 
 const table = "user"
 
 // GET ONE
-// Because Session returns ID as string, we need to parse it to integer
-export async function getUser(id: string) {
+async function getUserData(id: string) {
+  'use cache'
+  cacheTag('users')
+  cacheLife('max')
 
   try {
-    const user = await prisma[table].findFirst({
-      where: {
-        id: +id
-      }
-    })
-
-    return {
-      success: true,
-      payload: user
-    }
-
-  } catch (error) {
-    return {
-      success: false,
-      payload: null,
-      message: "Failed to get user"
-    }
+    const user = await prisma[table].findFirst({ where: { id: +id } })
+    return { success: true, payload: user }
+  } catch {
+    return { success: false, payload: null, message: "Failed to get user" }
   }
-  
+}
+
+export async function getUser(id: string) {
+  return getUserData(id)
 }
 
 // GET ALL (paginated)
-export async function getUsers(page: number = 1, perPage: number = USERS_PER_PAGE) {
+async function getUsersData(page: number, perPage: number) {
+  'use cache'
+  cacheTag('users')
+  cacheLife('max')
 
   try {
     const skip = (page - 1) * perPage
@@ -43,28 +38,23 @@ export async function getUsers(page: number = 1, perPage: number = USERS_PER_PAG
         where: { deletedAt: null },
         skip,
         take: perPage,
-        orderBy: { id: 'asc' },
+        orderBy: { id: "asc" },
       }),
       prisma[table].count({ where: { deletedAt: null } }),
     ])
-
     return {
       success: true,
       payload: users,
       total,
       totalPages: Math.max(1, Math.ceil(total / perPage)),
     }
-
-  } catch (error) {
-    return {
-      success: false,
-      payload: null,
-      total: 0,
-      totalPages: 1,
-      message: "Failed to get users"
-    }
+  } catch {
+    return { success: false, payload: null, total: 0, totalPages: 1, message: "Failed to get users" }
   }
+}
 
+export async function getUsers(page: number = 1, perPage: number = USERS_PER_PAGE) {
+  return getUsersData(page, perPage)
 }
 
 // CREATE
@@ -130,7 +120,7 @@ export async function createUser(_prevState: any, formData: FormData) {
       }
     })
 
-    // Revalidate route cache
+    revalidateTag("users", "max")
     revalidatePath("/dashboard/users")
 
     return {
@@ -158,6 +148,7 @@ export async function softDeleteUser(id: string) {
       data: { deletedAt: new Date() }
     })
 
+    revalidateTag("users", "max")
     revalidatePath("/dashboard/users")
 
     return {
@@ -211,6 +202,7 @@ export async function updateUser(_prevState: any, formData: FormData) {
       data: { name, email, role: safeRole as any, updatedAt: new Date() }
     })
 
+    revalidateTag("users", "max")
     revalidatePath("/dashboard/users")
 
     return {

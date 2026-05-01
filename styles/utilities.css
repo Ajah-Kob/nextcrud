@@ -20,9 +20,9 @@
   }
 
   .button {
-    @apply transition-all ease-in-out duration-300 hover:bg-gray-300 min-w-10 min-h-10 flex items-center justify-center py-2 px-3;
+    @apply transition-all ease-in-out duration-300 hover:bg-tertiary min-w-10 min-h-10 flex items-center justify-center py-2 px-3;
     &.button--circle {
-      @apply rounded-full px-0 py-0 flex items-center justify-center hover:bg-gray-200;
+      @apply rounded-full px-0 py-0 flex items-center justify-center hover:bg-secondary;
     }
   }
 
@@ -32,7 +32,7 @@
 
   .form-control {
     label {
-      @apply block text-sm font-medium text-gray-700 ml-1 mb-1;
+      @apply block font-medium text-gray-700 ml-1 mb-1;
     }
     .error {
       @apply italic ml-1 leading-none mt-1 mr-1 text-[14px] text-rose-500 font-semibold first-letter:uppercase;

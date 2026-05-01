@@ -47,8 +47,8 @@ export default function DrawerProfile() {
         <User />
       </button>
       {isOpen && (
-        <div className="animated absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded z-10">
-          <div className="px-2 py-3 border-b border-gray-200 flex gap-2">
+        <div className="animated absolute right-0 mt-2 w-48 bg-white border border-secondary rounded z-10">
+          <div className="px-2 py-3 border-b border-secondary flex gap-2">
             <div className="min-w-8">
               {session?.user?.image ? (
                 <Image
@@ -64,14 +64,14 @@ export default function DrawerProfile() {
             </div>
             <div>
               <p>{session?.user?.name}</p>
-              <p className="text-sm text-gray-500">{session?.user?.email}</p>
+              <p className="text-gray-500">{session?.user?.email}</p>
             </div>
           </div>
           <div className="flex flex-col justify-center py-3 px-1">
             {(session?.user?.role === 'SUPERADMIN' || session?.user?.role === 'ADMIN') && (
               <Link
                 href="/dashboard"
-                className="hover:bg-gray-100 p-2 rounded animated"
+                className="hover:bg-primary p-2 rounded animated"
                 onClick={() => setIsOpen(false)}
               >
                 <LayoutDashboard className="inline mr-2 mb-1" />
@@ -81,7 +81,7 @@ export default function DrawerProfile() {
 
             <Link
               href="/dashboard/user/profile"
-              className="hover:bg-gray-100 p-2 rounded animated"
+              className="hover:bg-primary p-2 rounded animated"
               onClick={() => setIsOpen(!isOpen)}
             >
               <UserPen className="inline mr-2 mb-1" />
@@ -90,7 +90,7 @@ export default function DrawerProfile() {
 
             <Link
               href="/dashboard/user/security"
-              className="hover:bg-gray-100 p-2 rounded animated"
+              className="hover:bg-primary p-2 rounded animated"
               onClick={() => setIsOpen(!isOpen)}
             >
               <ShieldEllipsis className="inline mr-2 mb-1" />

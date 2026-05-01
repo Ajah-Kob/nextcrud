@@ -20,10 +20,10 @@ export default function Drawer() {
     <div
       className={`${
         open ? 'w-64 z-10 opacity-100' : 'w-0 -z-0 opacity-0'
-      } fixed top-0 left-0 h-dvh max-w-64 animated overflow-hidden bg-gray-200`}
+      } fixed top-0 left-0 h-dvh max-w-64 animated overflow-hidden bg-secondary`}
     >
       {/* Header */}
-      <div className="min-w-64 px-5 border-b border-gray-300 border-r">
+      <div className="min-w-64 px-5 border-b border-tertiary border-r">
         <div className="flex items-center justify-between gap-3 h-16">
           <h1 className="">
             <Link href="/">{SCHOOL_NAME}</Link>
@@ -41,8 +41,8 @@ export default function Drawer() {
           <Link
             href="/dashboard/users"
             onClick={toggle}
-            className={`flex items-center gap-3 px-3 py-2 rounded animated hover:bg-gray-300 ${
-              pathname === '/dashboard/users' ? 'bg-gray-300 font-medium' : ''
+            className={`flex items-center gap-3 px-3 py-2 rounded animated hover:bg-tertiary ${
+              pathname === '/dashboard/users' ? 'bg-tertiary font-medium' : ''
             }`}
           >
             <Users size={20} />
